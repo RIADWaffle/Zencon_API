@@ -4,7 +4,8 @@ import pandas as pd
 from flask import Flask
 
 #Read the dataset and get the correlation
-data = pd.read_csv('Zencon_API\datos3.csv')
+url = 'https://raw.githubusercontent.com/RIADWaffle/Zencon_API/e8bcca1fb64d7d47226f90df2b3b51e2a34b264b/datos3.csv?token=GHSAT0AAAAAACHX2Q44OV3CD2QB7VZQQRT4ZIIRPUA'
+data = pd.read_csv(url, index_col=0)
 corr = data.corr()
 
 # Create a Flask app
