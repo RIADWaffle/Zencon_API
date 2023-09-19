@@ -1,9 +1,4 @@
-import tensorflow as tf
-from tensorflow import keras
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 import pandas as pd
-import numpy as np
 import plotly.express as px
 
 
