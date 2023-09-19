@@ -1,33 +1,30 @@
 # Import the necessary libraries
 import plotly.graph_objects as go
 import pandas as pd
-from flask import Flask
+from flask import Flask, jsonify
+
+import PCA, RNA
+import correlationMatrix as corr
 
 #Read the dataset and get the correlation
-url = 'https://raw.githubusercontent.com/RIADWaffle/Zencon_API/e8bcca1fb64d7d47226f90df2b3b51e2a34b264b/datos3.csv?token=GHSAT0AAAAAACHX2Q44OV3CD2QB7VZQQRT4ZIIRPUA'
-data = pd.read_csv(url, index_col=0)
-corr = data.corr()
 
-# Create a Flask app
 app = Flask(__name__)
 
+@app.route('/PCA', methods=['GET'])
+def route1():
 
-# Define the route for the API
-@app.route('/corelation', methods=['GET']) # type: ignore
+    return jsonify(PCA.plot(4).to_json())
 
+@app.route('/correlation', methods=['GET'])
+def route2():
+    return jsonify(corr.plot().to_json())
 
-def api():
-    # Create a heatmap
-    fig = go.Figure(data=go.Heatmap(
-        x=corr.columns,
-        y=corr.columns,
-        z=corr,
-        colorscale="Tealgrn",
-        transpose= True
-    ))
+@app.route('/RNA', methods=['GET'])
+def route3():
+    return jsonify(RNA.plot('BMI').to_json())
 
-    # Return the response
-    return fig.to_json()
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 
