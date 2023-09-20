@@ -1,5 +1,5 @@
-from flask import jsonify
 import pandas as pd
+import plotly
 import plotly.express as px
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -52,4 +52,4 @@ def plot(components):
         'font_color' : 'rgb(225,225,225)'
     })
 
-    return fig
+    return plotly.io.to_json(fig, validate=True)
